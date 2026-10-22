@@ -391,16 +391,27 @@ KiB Swap:        0 total,        0 used,        0 free.    67100 cached Mem
 - o або O — задати фільтр за умовою (наприклад, %MEM>1.0 або COMMAND=bash).
 - i — приховати всі процеси, які перебувають у стані "сну" чи неактивні (показати тільки активні / running).
 
+Для прикладу я використав прапорець (i)
 
+```
+student@CsnKhai:~$ top
+top - 10:32:48 up 14 min,  2 users,  load average: 0.01, 0.04, 0.03
+Tasks:  67 total,   1 running,  66 sleeping,   0 stopped,   0 zombie
+%Cpu(s):  0.7 us,  1.0 sy,  0.0 ni, 98.3 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st
+KiB Mem:    247792 total,   105680 used,   142112 free,    15464 buffers
+KiB Swap:        0 total,        0 used,        0 free.    62860 cached Mem
+
+  PID USER      PR  NI    VIRT    RES    SHR S %CPU %MEM     TIME+ COMMAND
+  879 student   20   0   11192   1888   1100 S  0.7  0.8   0:01.99 sshd
+    3 root      20   0       0      0      0 S  0.3  0.0   0:01.01 ksoftirqd/0
+  916 student   20   0    5328   1400   1188 S  0.3  0.6   0:00.48 bash
+```
 
 
 Керування процесами прямо з top:
 
 - k — надіслати сигнал завершення процесу (kill). Утиліта запитає PID процесу та номер сигналу (за замовчуванням 15 — SIGTERM).
 - r — змінити пріоритет процесу (renice). Запитає PID та нове значення Nice (від -20 до 19).
-
-
-
 
 Налаштування інтерфейсу та вихід:
 
@@ -410,8 +421,9 @@ KiB Swap:        0 total,        0 used,        0 free.    67100 cached Mem
 - W (Shift + w) — зберегти поточні налаштування у файл ~/.toprc.
 - q або Esc — вийти з програми top
 
+Наприклад нижче я змінив колір на червоний
 
-
+![alt text](image-3.png)
 
 ---
 
@@ -507,9 +519,32 @@ student@CsnKhai:/proc$ sudo pkill dd
 
 ### 18. Команди jobs, fg, bg, nohup. Навіщо вони призначені? Використовуючи команду sleep, yes продемонструйте механізм керування процесами за допомогою fg, bg.
 
+Спочатку я створив 2 файли test1, test2:
 Команда nohup (скорочення від no hangup) використовується для запуску процесів у фоновому режимі так, щоб вони продовжували працювати навіть після виходу з системи або закриття вікна терміналу:
 
+```
+student@CsnKhai:/proc$ cd
+student@CsnKhai:~$ nano test1
+Use "fg" to return to nano.
 nohup dd if=/dev/zero of=/dev/null &
+
+[1]+  Stopped                 nano test1
+student@CsnKhai:~$ nano test2
+Use "fg" to return to nano.
+
+[2]+  Stopped                 nano test2
+```
+
+Потім за допомогою команди jobs подивився список поточних завдань, запущених у даній сесії оболонки, з їхніми номерами ([1], [2]) та станом (Running, Stopped).
+
+```
+student@CsnKhai:~$ jobs
+[1]-  Stopped                 nano test1
+[2]+  Stopped                 nano test2
+```
+
+
+![alt text](image-5.png)
 
 Після того як я створив цей процес, я його тимчасово зупинив за допомогою sleep:
 
