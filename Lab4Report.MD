@@ -441,22 +441,43 @@ KiB Swap:        0 total,        0 used,        0 free.    62860 cached Mem
 
 ```
 student@CsnKhai:~$ top
-top - 10:43:43 up 24 min,  2 users,  load average: 0.03, 0.04, 0.04
-Tasks:  67 total,   2 running,  65 sleeping,   0 stopped,   0 zombie
-%Cpu0  :  0.3 us,  1.3 sy,  0.0 ni, 98.0 id,  0.0 wa,  0.0 hi,  0.3 si,  0.0 st
+top - 10:54:55 up 36 min,  2 users,  load average: 0.06, 0.15, 0.12
+Tasks:  67 total,   1 running,  66 sleeping,   0 stopped,   0 zombie
+%Cpu0  :  0.3 us,  1.3 sy,  0.0 ni, 98.3 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st
+KiB Mem:    247792 total,   112704 used,   135088 free,    15504 buffers
+KiB Swap:        0 total,        0 used,        0 free.    68404 cached Mem
 
   PID USER      PR  NI    VIRT    RES    SHR S %CPU %MEM     TIME+ COMMAND
-    3 root      20   0       0      0      0 S  0.3  0.0   0:02.16 ksoftirqd/0
-  879 student   20   0   11192   1888   1100 S  0.3  0.8   0:05.02 sshd
+  859 root      20   0   11192   3752   2988 S  0.0  1.5   0:00.02 sshd
+  863 root      20   0   11192   3736   2984 S  0.0  1.5   0:00.01 sshd
+  881 student   20   0    6680   3136   1760 S  0.0  1.3   0:00.04 bash
+  843 student   20   0    6660   2932   1616 S  0.0  1.2   0:00.02 bash
+  716 root      20   0    7796   2488   1988 S  0.0  1.0   0:00.02 sshd
     1 root      20   0    4196   2232   1392 S  0.0  0.9   0:01.25 init
+  802 root      20   0    4400   2024   1536 S  0.0  0.8   0:00.03 login
+  879 student   20   0   11192   1888   1100 S  0.3  0.8   0:08.34 sshd
+  424 root      20   0    5512   1856    140 S  0.0  0.7   0:00.00 dhclient
+  914 student   20   0   11192   1820   1044 S  0.0  0.7   0:00.02 sshd
+  354 root      20   0    4212   1720   1412 S  0.0  0.7   0:00.00 systemd-logind
+  916 student   20   0    5328   1400   1188 S  0.0  0.6   0:01.80 bash
+  257 root      20   0   12036   1356    972 S  0.0  0.5   0:00.12 systemd-udevd
+11154 student   20   0    5432   1356    988 R  0.0  0.5   0:00.00 top
+  356 syslog    20   0   30476   1068    728 S  0.0  0.4   0:00.07 rsyslogd
+  339 message+  20   0    4236    980    696 S  0.0  0.4   0:00.12 dbus-daemon
+  697 root      20   0    4644    836    716 S  0.0  0.3   0:00.00 getty
+  695 root      20   0    4644    828    716 S  0.0  0.3   0:00.00 getty
+  701 root      20   0    4644    828    716 S  0.0  0.3   0:00.00 getty
+  703 root      20   0    4644    828    716 S  0.0  0.3   0:00.00 getty
+  700 root      20   0    4644    824    716 S  0.0  0.3   0:00.00 getty
+  915 student   20   0    2460    812    684 S  0.0  0.3   0:00.00 sftp-server
+  717 root      20   0    3052    796    624 S  0.0  0.3   0:00.02 cron
+  586 root      20   0    2996    640    364 S  0.0  0.3   0:00.04 upstart-socket-
+  252 root      20   0    3008    616    468 S  0.0  0.2   0:00.16 upstart-udev-br
+  374 root      20   0    2880    592    356 S  0.0  0.2   0:00.06 upstart-file-br
+11274 student   20   0    4220    280    228 S  0.0  0.1   0:00.00 sleep
     2 root      20   0       0      0      0 S  0.0  0.0   0:00.01 kthreadd
+    3 root      20   0       0      0      0 S  0.0  0.0   0:03.10 ksoftirqd/0
     5 root       0 -20       0      0      0 S  0.0  0.0   0:00.00 kworker/0:0H
-    6 root      20   0       0      0      0 S  0.0  0.0   0:00.23 kworker/u2:0
-    7 root      20   0       0      0      0 S  0.0  0.0   0:01.57 rcu_sched
-    8 root      20   0       0      0      0 S  0.0  0.0   0:00.00 rcu_bh
-    9 root      rt   0       0      0      0 S  0.0  0.0   0:00.00 migration/0
-   10 root      rt   0       0      0      0 S  0.0  0.0   0:00.02 watchdog/0
-   11 root       0 -20       0      0      0 S  0.0  0.0   0:00.00 khelper
 ```
 
 ---
@@ -536,13 +557,11 @@ student@CsnKhai:/proc$ sudo pkill dd
 ### 18. Команди jobs, fg, bg, nohup. Навіщо вони призначені? Використовуючи команду sleep, yes продемонструйте механізм керування процесами за допомогою fg, bg.
 
 Спочатку я створив 2 файли test1, test2:
-Команда nohup (скорочення від no hangup) використовується для запуску процесів у фоновому режимі так, щоб вони продовжували працювати навіть після виходу з системи або закриття вікна терміналу:
 
 ```
 student@CsnKhai:/proc$ cd
 student@CsnKhai:~$ nano test1
 Use "fg" to return to nano.
-nohup dd if=/dev/zero of=/dev/null &
 
 [1]+  Stopped                 nano test1
 student@CsnKhai:~$ nano test2
@@ -559,37 +578,112 @@ student@CsnKhai:~$ jobs
 [2]+  Stopped                 nano test2
 ```
 
+За допомогою fg я відновив редактор 1 та 2 файлу
+
+```
+student@CsnKhai:~$ fg 1
+nano test1
+student@CsnKhai:~$ fg 2
+nano test2
+```
+
+```
+student@CsnKhai:~$ jobs
+student@CsnKhai:~$
+```
+
+---
+
+Команда nohup (скорочення від no hangup) використовується для запуску процесів у фоновому режимі так, щоб вони продовжували працювати навіть після виходу з системи або закриття вікна терміналу:
+
+```
+student@CsnKhai:~$ jobs
+student@CsnKhai:~$ nohup dd if=/dev/zero of=/dev/null &
+[1] 14499
+student@CsnKhai:~$ nohup: ignoring input and appending output to ‘nohup.out’
+```
+
+```
+student@CsnKhai:~$ jobs
+[1]+  Running                 nohup dd if=/dev/zero of=/dev/null &
+```
+
+І навіть після перезаходу цей процес буде працювати
 
 ![alt text](image-5.png)
 
-Після того як я створив цей процес, я його тимчасово зупинив за допомогою sleep:
+---
+
+Після того я виконав команду затримки виконання за допомогою sleep:
 
 ```
-
+student@CsnKhai:~$ sleep 100
 ```
 
-```
+Потім я призупинив цей процес за допомогою клавіш Ctrl + Z
 
+```
+^Z
+[1]+  Stopped                 sleep 100
 ```
 
 А потім повернув його обратно за допомогою bg:
 
 ```
+student@CsnKhai:~$ bg
+[1]+ sleep 100 &
+student@CsnKhai:~$ jobs
+[1]+  Running                 sleep 100 &
+```
 
+---
+
+За допомогою команди yes > /dev/null & я беззупинно генерую рядок у термінал 
+
+```
+student@CsnKhai:~$ yes > /dev/null &
+[1] 9115
 ```
 
 ```
+student@CsnKhai:~$ top
+top - 10:49:46 up 31 min,  2 users,  load average: 0.60, 0.19, 0.10
+Tasks:  68 total,   2 running,  66 sleeping,   0 stopped,   0 zombie
+%Cpu(s): 95.4 us,  1.5 sy,  0.0 ni,  0.0 id,  0.0 wa,  0.0 hi,  3.1 si,  0.0 st
+KiB Mem:    247792 total,   112572 used,   135220 free,    15504 buffers
+KiB Swap:        0 total,        0 used,        0 free.    68404 cached Mem
+
+  PID USER      PR  NI    VIRT    RES    SHR S %CPU %MEM     TIME+ COMMAND
+ 9115 student   20   0    4224    280    228 R 96.9  0.1   0:56.61 yes
+```
+А потім одразу його завершив
 
 ```
+student@CsnKhai:~$ kill 9115
+student@CsnKhai:~$ top
+top - 10:50:29 up 31 min,  2 users,  load average: 0.72, 0.27, 0.13
+Tasks:  67 total,   1 running,  66 sleeping,   0 stopped,   0 zombie
+%Cpu(s):  4.8 us,  1.1 sy,  0.0 ni, 93.7 id,  0.1 wa,  0.0 hi,  0.2 si,  0.0 st
+KiB Mem:    247792 total,   112472 used,   135320 free,    15504 buffers
+KiB Swap:        0 total,        0 used,        0 free.    68404 cached Mem
 
-Потім за допомогою команди yes > /dev/null & я беззупинно генерую рядок у термінал, а потім одразу його завершив 
+  PID USER      PR  NI    VIRT    RES    SHR S %CPU %MEM     TIME+ COMMAND
+    1 root      20   0    4196   2232   1392 S  0.0  0.9   0:01.25 init
+    2 root      20   0       0      0      0 S  0.0  0.0   0:00.01 kthreadd
+    3 root      20   0       0      0      0 S  0.0  0.0   0:02.66 ksoftirqd/0
+    5 root       0 -20       0      0      0 S  0.0  0.0   0:00.00 kworker/0:0H
+    6 root      20   0       0      0      0 S  0.0  0.0   0:00.25 kworker/u2:0
 
-```
 
-```
-
-```
-
+  115 root      20   0       0      0      0 S  0.0  0.0   0:00.00 kworker/0:2
+  116 root      20   0       0      0      0 S  0.0  0.0   0:00.00 scsi_eh_2
+  125 root      20   0       0      0      0 S  0.0  0.0   0:00.00 jbd2/sda1-8
+  126 root       0 -20       0      0      0 S  0.0  0.0   0:00.00 ext4-rsv-conver
+  252 root      20   0    3008    616    468 S  0.0  0.2   0:00.16 upstart-udev-br
+  257 root      20   0   12036   1356    972 S  0.0  0.5   0:00.12 systemd-udevd
+  339 message+  20   0    4236    980    696 S  0.0  0.4   0:00.12 dbus-daemon
+  354 root      20   0    4212   1720   1412 S  0.0  0.7   0:00.00 systemd-logind
+[1]+  Terminated              yes > /dev/null
 ```
 
 ---
