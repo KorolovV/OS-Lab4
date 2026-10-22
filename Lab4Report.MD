@@ -294,7 +294,11 @@ student  17648  0.0  0.4   5216  1156 pts/1    R+   05:42   0:00 ps -U student -
 student@CsnKhai:/proc$
 ```
 
+---
+
 ### 10. Які можна використовувати утиліти для аналізу задач, що виконуються (аналізуючи довідку по команді ps)?
+
+На приклад можна викоритсовувати | grep для виводу тих рядків що містять student
 
 ```
 student@CsnKhai:/proc$ ps aux | grep student
@@ -317,6 +321,26 @@ student  18327  0.0  0.4   5216  1164 pts/1    R+   05:44   0:00 ps aux
 student  18328  0.0  0.3   4672   824 pts/1    S+   05:44   0:00 grep --color=auto student
 student@CsnKhai:/proc$
 ```
+
+Замість комбінації ps aux | grep name можна використати pgrep. Вона шукає процеси за іменем або користувачем і повертає їхні PID
+
+```
+student@CsnKhai:/proc/889$ pgrep -u student -l
+853 bash
+889 sshd
+890 bash
+923 sshd
+924 sftp-server
+23923 sleep
+30580 dd
+30873 sshd
+30874 bash
+30909 sshd
+30910 sftp-server
+31257 bash
+```
+
+---
 
 ### 11. Вивчіть команду top. Яку інформацію вона виводить?
 
