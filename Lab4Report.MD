@@ -19,6 +19,8 @@
 - Zombie (Z): Процес завершив виконання, але його батьківський процес ще не зчитав код завершення (через системний виклик wait()). Займає лише запис у таблиці процесів.
 - Dead (X): Процес повністю завершено та видалено з таблиці процесів. Цей стан є кінцевим і практично не відображається утилітами спостереження.
 
+---
+
 ### 2. Вивчіть команду pstree. Виведіть (виділіть) ланцюжок (предків) поточного процесу.
 
 Команда pstree відображає запущені процеси у вигляді древоподібної структури, що чітко показує ієрархію між батьківськими та дочірніми процесами.
@@ -36,6 +38,8 @@ student@CsnKhai:~$
 - -p (--show-pids): Додає PID (ідентифікатор процесу) у дужках до кожної назви.
 - -h (--highlight-all): Виділяє поточний процес і його предків підсвічуванням (або жирним шрифтом у терміналі).
 
+---
+
 ### 3. Що таке файлова система proc?
 
 Файлова система proc — це віртуальна файлова система в Linux, яка монтується в каталог /proc. Вона не займає місця на жорсткому диску чи SSD, а існує виключно в оперативній пам'яті та генерується безпосередньо ядром під час звернення.
@@ -45,6 +49,8 @@ student@CsnKhai:~$
 Для прикладу я переглянув інформацію про оперативну пам'ять
 
 ![alt text](image-2.png)
+
+---
 
 ### 4. Виведіть інформацію про процесор (його тип, підтримувані технології тощо).
 
@@ -88,17 +94,134 @@ power management:
 - cpu cores / siblings: Кількість фізичних ядер та потоків.
 - flags (або Features на ARM): Список підтримуваних технологій та інструкцій.
 
+---
+
 ### 5. Візьміть id будь-якого процесу та перегляньте про нього інформацію за допомогою файлової системи proc. Яку інформацію можна отримати?
 
+Спочатку я вікрив proc, і потім прочитав стан процесу 889
 
+```
+student    889  0.4  0.7  11192  1944 ?        R    04:55   0:16 sshd: student@pts/1
+```
+
+```
+student@CsnKhai:/$ cd proc/
+student@CsnKhai:/proc$ cd 889
+student@CsnKhai:/proc/889$ ls -la
+ls: cannot read symbolic link cwd: Permission denied
+ls: cannot read symbolic link root: Permission denied
+ls: cannot read symbolic link exe: Permission denied
+total 0
+dr-xr-xr-x  9 student student 0 Oct 22 04:55 .
+dr-xr-xr-x 87 root    root    0 Oct 22 04:53 ..
+dr-xr-xr-x  2 student student 0 Oct 22 05:17 attr
+-rw-r--r--  1 root    root    0 Oct 22 05:17 autogroup
+-r--------  1 root    root    0 Oct 22 05:17 auxv
+-r--r--r--  1 root    root    0 Oct 22 05:17 cgroup
+--w-------  1 root    root    0 Oct 22 05:17 clear_refs
+-r--r--r--  1 root    root    0 Oct 22 04:55 cmdline
+-rw-r--r--  1 root    root    0 Oct 22 05:17 comm
+-rw-r--r--  1 root    root    0 Oct 22 05:17 coredump_filter
+-r--r--r--  1 root    root    0 Oct 22 05:17 cpuset
+lrwxrwxrwx  1 root    root    0 Oct 22 05:17 cwd
+-r--------  1 root    root    0 Oct 22 05:17 environ
+lrwxrwxrwx  1 root    root    0 Oct 22 05:17 exe
+dr-x------  2 root    root    0 Oct 22 05:17 fd
+dr-x------  2 root    root    0 Oct 22 05:17 fdinfo
+-rw-r--r--  1 root    root    0 Oct 22 05:17 gid_map
+-r--------  1 root    root    0 Oct 22 05:17 io
+-r--r--r--  1 root    root    0 Oct 22 05:17 latency
+-r--r--r--  1 root    root    0 Oct 22 05:17 limits
+-rw-r--r--  1 root    root    0 Oct 22 05:17 loginuid
+dr-x------  2 root    root    0 Oct 22 05:17 map_files
+-r--r--r--  1 root    root    0 Oct 22 05:17 maps
+-rw-------  1 root    root    0 Oct 22 05:17 mem
+-r--r--r--  1 root    root    0 Oct 22 05:17 mountinfo
+-r--r--r--  1 root    root    0 Oct 22 05:17 mounts
+-r--------  1 root    root    0 Oct 22 05:17 mountstats
+dr-xr-xr-x  5 student student 0 Oct 22 05:17 net
+dr-x--x--x  2 root    root    0 Oct 22 05:17 ns
+-rw-r--r--  1 root    root    0 Oct 22 05:17 oom_adj
+-r--r--r--  1 root    root    0 Oct 22 05:17 oom_score
+-rw-r--r--  1 root    root    0 Oct 22 05:17 oom_score_adj
+-r--r--r--  1 root    root    0 Oct 22 05:17 pagemap
+-r--r--r--  1 root    root    0 Oct 22 05:17 personality
+-rw-r--r--  1 root    root    0 Oct 22 05:17 projid_map
+lrwxrwxrwx  1 root    root    0 Oct 22 05:17 root
+-rw-r--r--  1 root    root    0 Oct 22 05:17 sched
+-r--r--r--  1 root    root    0 Oct 22 05:17 schedstat
+-r--r--r--  1 root    root    0 Oct 22 05:17 sessionid
+-rw-r--r--  1 root    root    0 Oct 22 05:17 setgroups
+-r--r--r--  1 root    root    0 Oct 22 05:17 smaps
+-r--r--r--  1 root    root    0 Oct 22 05:17 stack
+-r--r--r--  1 root    root    0 Oct 22 04:55 stat
+-r--r--r--  1 root    root    0 Oct 22 05:10 statm
+-r--r--r--  1 root    root    0 Oct 22 04:55 status
+-r--r--r--  1 root    root    0 Oct 22 05:17 syscall
+dr-xr-xr-x  3 student student 0 Oct 22 05:13 task
+-r--r--r--  1 root    root    0 Oct 22 05:17 timers
+-rw-r--r--  1 root    root    0 Oct 22 05:17 uid_map
+-r--r--r--  1 root    root    0 Oct 22 05:17 wchan
+```
+
+```
+student@CsnKhai:/proc/889$ cat status
+Name:   sshd
+State:  S (sleeping)
+Tgid:   889
+Ngid:   0
+Pid:    889
+PPid:   868
+TracerPid:      0
+Uid:    1000    1000    1000    1000
+Gid:    1000    1000    1000    1000
+FDSize: 32
+Groups: 4 24 27 30 46 109 110 1000
+VmPeak:    11196 kB
+VmSize:    11192 kB
+VmLck:         0 kB
+VmPin:         0 kB
+VmHWM:      2040 kB
+VmRSS:      2040 kB
+VmData:      644 kB
+VmStk:       136 kB
+VmExe:       800 kB
+VmLib:      6556 kB
+VmPTE:        28 kB
+VmSwap:        0 kB
+Threads:        1
+SigQ:   0/1784
+SigPnd: 0000000000000000
+ShdPnd: 0000000000000000
+SigBlk: 0000000000000000
+SigIgn: 0000000000001000
+SigCgt: 0000000180010000
+CapInh: 0000000000000000
+CapPrm: 0000000000000000
+CapEff: 0000000000000000
+CapBnd: 0000001fffffffff
+Seccomp:        0
+Cpus_allowed:   1
+Cpus_allowed_list:      0
+Mems_allowed:   1
+Mems_allowed_list:      0
+voluntary_ctxt_switches:        41612
+nonvoluntary_ctxt_switches:     13306
+```
+
+---
 
 ### 6. Використовуючи команду ps, отримайте інформацію про розглянутий раніше процес (у питанні 5). Інформація має бути наступною: власник процесу, аргументи, з якими було запущено процес виконання, група-власник цього процесу тощо.
+
+За допомогою команди ps -fp 889 була виведена інформація:
 
 ```
 student@CsnKhai:/proc/889/task/889$ ps -fp 889
 UID        PID  PPID  C STIME TTY          TIME CMD
 student    889   868  0 04:55 ?        00:00:09 sshd: student@pts/1
 ```
+
+
 
 ### 7. Як визначити процеси ядра та користувацькі процеси?
 
