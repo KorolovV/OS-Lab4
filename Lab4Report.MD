@@ -354,6 +354,10 @@ student@CsnKhai:/proc/889$ pgrep -u student -l
 
 ### 12. Відобразіть процеси лише для конкретного користувача за допомогою команди top.
 
+За допомогою прапорця U я відфільтрував тільки ті процеси, які виконуються для student
+
+![alt text](image-4.png)
+
 ```
 top - 05:52:33 up 58 min,  3 users,  load average: 0.00, 0.01, 0.05
 Tasks:  73 total,   1 running,  72 sleeping,   0 stopped,   0 zombie
@@ -375,6 +379,8 @@ KiB Swap:        0 total,        0 used,        0 free.    67100 cached Mem
 20742 student   20   0    5440   1468   1080 R  0.0  0.6   0:00.00 top
 21095 student   20   0    4220    284    228 S  0.0  0.1   0:00.00 sleep
 ```
+
+---
 
 ### 13. Які інтерактивні команди можна подавати керувати командою top? Наведіть кілька прикладів.
 
