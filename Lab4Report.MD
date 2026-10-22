@@ -221,7 +221,7 @@ UID        PID  PPID  C STIME TTY          TIME CMD
 student    889   868  0 04:55 ?        00:00:09 sshd: student@pts/1
 ```
 
-
+---
 
 ### 7. Як визначити процеси ядра та користувацькі процеси?
 
