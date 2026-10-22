@@ -274,6 +274,8 @@ root        27  0.0  0.0      0     0 ?        SN   04:54   0:00 [ksmd]
 
 ### 9. Виведіть процеси лише конкретного користувача.
 
+За допомогою прапорця -U команди ps вивів процеси тільки користувача student
+
 ```
 student@CsnKhai:/proc$  ps -U student -u student u
 USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
